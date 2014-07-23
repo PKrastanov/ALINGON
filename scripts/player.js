@@ -3,7 +3,7 @@ function player(name, color) {
     this.color = color
     this.name = name;
 
-    this.rollTheDice = function () {               // roll the dice functios it returns an array of the dices (2)
+    this.rollTheDice = function () {    //it returns an array of the dices 
        var dices = [];
        dices[0] = random(2,6);        
        dices[1] = random(2, 6);
