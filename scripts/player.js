@@ -8,7 +8,7 @@ var Player = (function () {
     function init() {
         var pawns = [];
         for (var i = 0; i < 4; i++) {
-            pawns[i] = new Pawn(color);
+            pawns[i] = new Pawn();
         }
         return pawns;
     }
