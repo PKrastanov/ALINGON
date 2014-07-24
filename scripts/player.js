@@ -1,9 +1,9 @@
 var Player = (function () {
 
     //Private
-    function random(min, max) {
-        return Math.floor((Math.random() * max - 1) + min);
-    }
+    //function random(min, max) {
+    //    return Math.floor((Math.random() * max - 1) + min);
+    //}
 
     function init() {
         var pawns = [];
@@ -20,12 +20,12 @@ var Player = (function () {
         this.name = name;
     };
 
-    Player.prototype.rollTheDice = function () {    //it returns an array of the dices
-        var dices = [];
-        dices[0] = random(2, 6);
-        dices[1] = random(2, 6);
-        return dices;
-    };
+    //Player.prototype.rollTheDice = function () {    //it returns an array of the dices
+    //    var dices = [];
+    //   dices[0] = random(2, 6);
+    //     dices[1] = random(2, 6);
+    //    return dices;
+    //};
 
     Player.prototype.addNewPawn = function () {                  // addNewPawn adds new Pawn to the Field
         for (var i = 0; i < this.pawns.length; i++) {
