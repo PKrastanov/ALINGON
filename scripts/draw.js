@@ -45,6 +45,16 @@ function drawTheBoard() {
             }
         }
     }
+    
+    ctx.putImageData(drawStartField("yellow", 200), 20, 20);
+    ctx.putImageData(drawStartField("red", 200), 20, 420);
+    ctx.putImageData(drawStartField("blue", 200), 420, 20);
+    ctx.putImageData(drawStartField("green", 200), 420, 420);
+    ctx.font="60px Verdana";
+    ctx.fillText("JS",50,180);
+    ctx.fillText("C#",50,580);
+    ctx.fillText("Ruby",450,180);
+    ctx.fillText("Java",450,580);
 }
 
 
@@ -82,11 +92,6 @@ function refreshBoard() {
 function resizeboard() {
     refreshBoard();
     drawTheBoard();
-    updateAllPlanes();
-    //handcount = handcount == 0 ? 0 : handcount - 1;
-    changeHands();
-    if (!onmobile)
-        document.getElementById("buttondiv").style.visibility = "";
 }
 function drawARegularTile(color, width) {
     var imgData = ctx.createImageData(width, width);
@@ -108,6 +113,23 @@ function drawARegularTile(color, width) {
             else {
                 setColor(color);
             }
+            imgData.data[pos++] = colorR;
+            imgData.data[pos++] = colorG;
+            imgData.data[pos++] = colorB;
+            imgData.data[pos++] = colorA;
+        }
+    }
+    return imgData;
+}
+
+function drawStartField(color, width, text) {
+    var imgData = ctx.createImageData(width, width);
+    var pos = 0;
+    setColor(color);
+    for (var x = 0; x < width; x++) {
+        for (var y = 0; y < width; y++) {
+            var x2 = x - Math.ceil(width / 2);
+            var y2 = y - Math.ceil(width / 2);
             imgData.data[pos++] = colorR;
             imgData.data[pos++] = colorG;
             imgData.data[pos++] = colorB;
