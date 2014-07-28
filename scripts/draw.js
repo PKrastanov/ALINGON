@@ -1,8 +1,6 @@
-
-window.onload = init;
-window.onresize = resizeboard;
-var maindiv;
-var canvas = null, ctx = null;
+var Draw = (function () {
+init();
+})();
 
 function init() {
     initPlayGround();
