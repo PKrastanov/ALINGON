@@ -30,7 +30,7 @@ var Start = (function () {
     };
 
     function init (playerName, language) {
-        Draw.bord();
+        Draw.drawTheBoard();
 
         // TODO: add event listener for questions.
 
