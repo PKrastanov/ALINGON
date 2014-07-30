@@ -14,10 +14,11 @@ var Player = (function () {
     }
 
     //Public
-    var Player = function (name, color) {
+    var Player = function (name, color, path) {
         this.pawns = init();
         this.color = color;
         this.name = name;
+        this.path = path;
     };
 
     //Player.prototype.rollTheDice = function () {    //it returns an array of the dices

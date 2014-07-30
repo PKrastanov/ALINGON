@@ -2,14 +2,13 @@ var Start = (function () {
 'use strict';
 
     var game = function(playerName, language) {
-
-        var allPlayers = init(playerName, language);
+        var path = createPath();
+        var allPlayers = init(playerName, language, path);
 
         var play = function () {
-
-            if(isBotTurn()) {
+            //if(isBotTurn()) {
                 //TODO: how bot will play (some animation).
-            }
+            //}
 
             //Draw Parts (every time).
             //Draw.pawns(allPlayers);
@@ -29,16 +28,14 @@ var Start = (function () {
 
     };
 
-    function init (playerName, language) {
-        Draw.drawTheBoard();
-
+    function init (playerName, language, path) {
         // TODO: add event listener for questions.
 
         return {
-            gamer: new Player(playerName, language),
-            botOne: new Player('Bot1', getDifferentPlayer()),
-            botTwo: new Player('Bot2', getDifferentPlayer()),
-            botThree: new Player('Bot3', getDifferentPlayer())
+            gamer: new Player(playerName, language, path.first),
+            botOne: new Player('Bot1', getDifferentPlayer(), path.second),
+            botTwo: new Player('Bot2', getDifferentPlayer(), path.thurd),
+            botThree: new Player('Bot3', getDifferentPlayer(), path.four)
         };
     }
 
@@ -47,7 +44,7 @@ var Start = (function () {
     }
 
     return {
-        game: game
+        game: game()
     }
 
 })();
