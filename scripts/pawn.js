@@ -8,6 +8,7 @@ var Pawn = (function () {
         this.finished = finished;
         this.position = path[0];
         this.path = path;
+        this.numberPosition = 0;
     };
     
     Pawn.prototype.setValue = function (type) {
@@ -20,8 +21,8 @@ var Pawn = (function () {
     };
 
     Pawn.prototype.setPosition = function (number) {
-        this.position = this.path[number];
-        console.log(this.position);
+        this.numberPosition += number;
+        this.position = this.path[this.numberPosition];
     };
 
     return Pawn;

@@ -11,8 +11,7 @@ function initPlayGround() {
     canvas = document.getElementById("gameboard");
     ctx = canvas.getContext("2d");
 
-    canvasTwo = document.getElementById("pown-layer");
-    ctxTwo = canvasTwo.getContext("2d");
+    paper = Raphael(5, 5, 633, 633);
 
     ctx.font = "20px helvetica"
     ctx.globalAlpha = 1.0;
@@ -116,18 +115,14 @@ function createPath() {
 }
 
 function movePawns (allPlayers) {
-    ctxTwo.clearRect(0, 0, 633, 633);
-    ctxTwo.beginPath();
-
+    paper.clear();
     for(var player in allPlayers) {
         var thisPlayer = allPlayers[player];
 
         for(var i = 0; i < thisPlayer.pawns.length; i++) {
             if(thisPlayer.pawns[i].started) {
-                ctxTwo.fillStyle = thisPlayer.color;
-                ctxTwo.rect(thisPlayer.pawns[i].position.x, thisPlayer.pawns[i].position.y, 20, 20);
-                ctxTwo.fill();
-                ctxTwo.stroke();
+                paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 5)
+                    .attr({fill: thisPlayer.color});
             }
         }
     }
