@@ -2,14 +2,12 @@ var Pawn = (function () {
 
     var ConstTypes = ['javascript', 'cSharp', 'java', 'python'];
     
-    var Pawn = function (type) {          // started means that the pawn is on the board
-        this.type = type;
-        this.started = false;
-        this.finished = false;
-        this.position = {
-            x: 0,
-            y: 0
-        };
+    var Pawn = function (path, started, finished) {          // started means that the pawn is on the board
+        //this.type = type;
+        this.started = started;
+        this.finished = finished;
+        this.position = path[0];
+        this.path = path;
     };
     
     Pawn.prototype.setValue = function (type) {
@@ -21,9 +19,9 @@ var Pawn = (function () {
         }
     };
 
-    Pawn.prototype.setPosition = function (position) {
-        this.position.x = position.x;
-        this.position.y = position.y;
+    Pawn.prototype.setPosition = function (number) {
+        this.position = this.path[number];
+        console.log(this.position);
     };
 
     return Pawn;

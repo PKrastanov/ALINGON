@@ -115,20 +115,26 @@ function createPath() {
     }
 }
 
-function movePowns (allPowns) {
+function movePawns (allPlayers) {
     ctxTwo.clearRect(0, 0, 633, 633);
-    ctx.beginPath();
+    ctxTwo.beginPath();
 
-    for(var i = 0; i < allPowns.length; i++) {
-        ctx.rect(allPowns[i].path.x, allPowns[i].path.y, 20, 20);
+    for(var player in allPlayers) {
+        var thisPlayer = allPlayers[player];
+
+        for(var i = 0; i < thisPlayer.pawns.length; i++) {
+            if(thisPlayer.pawns[i].started) {
+                ctxTwo.fillStyle = thisPlayer.color;
+                ctxTwo.rect(thisPlayer.pawns[i].position.x, thisPlayer.pawns[i].position.y, 20, 20);
+                ctxTwo.fill();
+                ctxTwo.stroke();
+            }
+        }
     }
-
-    ctx.fill();
-    ctx.stroke();
 }
 
 function createMyMap() {
-    var mapxy = new Array();
+    var mapxy = [];
     //notile:0, blue:1,green:2,red:3,yello:4,orange:5;
     mapxy.push([0, 0, 0, 0, 0, 0, 4, 4, 5, 0, 0, 0, 0, 0, 0]);
     mapxy.push([0, 0, 0, 0, 0, 0, 5, 4, 5, 0, 0, 0, 0, 0, 0]);

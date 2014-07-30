@@ -5,20 +5,23 @@ var Player = (function () {
     //    return Math.floor((Math.random() * max - 1) + min);
     //}
 
-    function init() {
+    function init(path) {
         var pawns = [];
         for (var i = 0; i < 4; i++) {
-            pawns[i] = new Pawn();
+            if(i === 0) {
+                pawns.push(new Pawn(path, true, false));
+            }
+            pawns.push(new Pawn(path, false, false));
         }
         return pawns;
     }
 
     //Public
     var Player = function (name, color, path) {
-        this.pawns = init();
+        this.path = path;
         this.color = color;
         this.name = name;
-        this.path = path;
+        this.pawns = init(path);
     };
 
     //Player.prototype.rollTheDice = function () {    //it returns an array of the dices
