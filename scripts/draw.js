@@ -303,3 +303,112 @@ function setColor(color) {
         default: colorR = 0, colorG = 0, colorB = 0, colorA = 0; break;
     }
 }
+
+
+
+function drawDot(X, Y, x, y) {
+    var round = 2;
+    for (var i = 0; i < X.length; i++) {
+        if (X[i] >= x - round && X[i] <= x + round && Y[i] >= y - round && Y[i] <= y + round) {
+            return true;
+        }
+    }
+
+    //if (X >= x - round && X <= x + round && Y >= y - round && Y <= y + round) {
+    //    return true;
+    //}
+    return false;
+}
+
+function drawDice(width, value) {
+    var imgData = ctx.createImageData(width, width);
+    var pos = 0;
+    var X = [];
+    var Y = [];
+    switch (value) {
+        case 1:
+            X.push(Math.ceil(width / 2));
+            Y.push(Math.ceil(width / 2));
+            break;
+        case 2:
+            X.push(Math.ceil(width / 3));
+            Y.push(Math.ceil(width / 2));
+            X.push(Math.ceil(width - width / 3));
+            Y.push(Math.ceil(width / 2));
+            break;
+        case 3:
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width / 4));
+            X.push(Math.ceil(width / 2));
+            Y.push(Math.ceil(width / 2));
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width - width / 4));
+            break;
+        case 4:
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width - width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width - width / 4));
+
+            break;
+        case 5:
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width - width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width - width / 4));
+
+            X.push(Math.ceil(width / 2));
+            Y.push(Math.ceil(width / 2));
+            break;
+        case 6:
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width / 2));
+
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width / 2));
+
+            X.push(Math.ceil(width / 4));
+            Y.push(Math.ceil(width - width / 4));
+
+            X.push(Math.ceil(width - width / 4));
+            Y.push(Math.ceil(width - width / 4));
+            break;
+    }
+    console.log(X);
+    for (var y = 0; y < width; y++) {
+        for (var x = 0; x < width; x++) {
+
+            setColor("white");
+            if (drawDot(X, Y, x, y)) {
+                setColor("black");
+            }
+            imgData.data[pos++] = colorR;
+            imgData.data[pos++] = colorG;
+            imgData.data[pos++] = colorB;
+            imgData.data[pos++] = colorA;
+        }
+    }
+    console.log(imgData);
+    return imgData;
+}
+
