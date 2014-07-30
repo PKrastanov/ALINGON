@@ -1,29 +1,37 @@
+var movePawn = 0;
+
 var Start = (function () {
 'use strict';
-
+    var allPlayers
     var game = function(playerName, language) {
-
         var path = createPath();
-        var allPlayers = init(playerName, language, path);
-        play();
-
-
-        function play() {
-
-            movePawns(allPlayers);
-            
-            for(var player in allPlayers) {
-                allPlayers[player].pawns[0].setPosition(4);
-            }
-
-            movePawns(allPlayers);
-
-            setInterval(play, 2000);
-        }
-
+        allPlayers = init(playerName, path);
+        play(0);
     };
 
-    function init (playerName, language, path) {
+    function play(movePawn) {
+        layerTwo.clear();
+        movePawns(allPlayers);
+
+        for (var player in allPlayers) {
+            if (player == 'gamer') {
+                allPlayers[player].pawns[0].setPosition(movePawn);
+            }
+            else {
+                if(movePawn > 0) {
+                    var number = Math.floor((Math.random() * 6) + 1);
+                }
+                else {
+                    var number = 0;
+                }
+                allPlayers[player].pawns[0].setPosition(number);
+            }
+        }
+
+        setInterval(rollDace(), 3000);
+    }
+
+    function init (playerName, path) {
         // TODO: add event listener for questions.
         return {
             gamer: new Player(playerName, '#00FF00', path.first),
@@ -34,7 +42,8 @@ var Start = (function () {
     }
 
     return {
-        game: game()
+        game: game(),
+        play: play
     }
 
 })();

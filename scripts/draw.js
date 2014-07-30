@@ -1,3 +1,8 @@
+var paper = Raphael(5, 5, 633, 633);
+var layerTwo = Raphael(5, 5, 633, 633);
+var canvas = document.getElementById("gameboard");
+var ctx = canvas.getContext("2d");
+
 var Draw = (function () {
     init();
 })();
@@ -5,23 +10,20 @@ var Draw = (function () {
 function init() {
     initPlayGround();
 }
+
 function initPlayGround() {
     document.getElementById("playGround").style.display = "";
     maindiv = document.getElementById("main");
-    canvas = document.getElementById("gameboard");
-    ctx = canvas.getContext("2d");
 
-    paper = Raphael(5, 5, 633, 633);
-
-    ctx.font = "20px helvetica"
+    ctx.font = "20px helvetica";
     ctx.globalAlpha = 1.0;
     canvas.setStyle = function (styleMap) {
-        var styleString = new String();
+        var styleString = '';
         for (i in styleMap) {
             styleString += i + ':' + styleMap[i] + '; ';
         }
         canvas.setAttribute('style', styleString);
-    }
+    };
     var canvasStyle = {
         'background': '#fff',
         'border': '1px solid grey'
@@ -133,6 +135,39 @@ function movePawns (allPlayers) {
     }
 }
 
+var rollDace = function  () {
+    var number;
+    var reddy = false;
+    var centerHeight = layerTwo.height/2-30;
+    var centerWidth = layerTwo.width/2-30;
+    document.addEventListener('click', function () {
+        reddy = true;
+    });
+
+    var randomNumber = function () {
+        layerTwo.clear();
+        number = Math.floor((Math.random() * 6) + 1);
+
+        layerTwo.rect(centerHeight, centerWidth, 80, 80, 5).attr({
+            fill: 'white'
+        });
+        layerTwo.text(centerHeight+40, centerWidth+40, number+'').attr({
+            "font-size": 60
+        });
+
+        if(!reddy) {
+            setTimeout(randomNumber, 50)
+        }
+        else {
+            layerTwo.clear();
+            Start.play(number);
+        }
+
+    };
+
+    randomNumber();
+};
+
 function createMyMap() {
     var mapxy = [];
     //notile:0, blue:1,green:2,red:3,yello:4,orange:5;
@@ -178,7 +213,7 @@ function drawARegularTile(color, width) {
             var distance = Math.ceil(Math.sqrt(x2 * x2 + y2 * y2));
             var circlewall = Math.ceil(width / 2 * 0.8);
             var circleWidth = Math.ceil(width / 20);
-            ys = new Array();
+            ys = [];
             for (var j = 0; j < circleWidth; j++) {
                 ys.push(y - Math.ceil(circleWidth / 2 * 0.9) - +circleWidth + j);
             }
@@ -203,8 +238,6 @@ function drawStartField(color, width, text) {
     setColor(color);
     for (var x = 0; x < width; x++) {
         for (var y = 0; y < width; y++) {
-            var x2 = x - Math.ceil(width / 2);
-            var y2 = y - Math.ceil(width / 2);
             imgData.data[pos++] = colorR;
             imgData.data[pos++] = colorG;
             imgData.data[pos++] = colorB;

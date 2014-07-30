@@ -11,7 +11,9 @@ var Player = (function () {
             if(i === 0) {
                 pawns.push(new Pawn(path, true, false));
             }
-            pawns.push(new Pawn(path, false, false));
+            else {
+                pawns.push(new Pawn(path, false, false));
+            }
         }
         return pawns;
     }
