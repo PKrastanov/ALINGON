@@ -394,7 +394,6 @@ function drawDice(width, value) {
             Y.push(Math.ceil(width - width / 4));
             break;
     }
-    console.log(X);
     for (var y = 0; y < width; y++) {
         for (var x = 0; x < width; x++) {
 
@@ -408,7 +407,6 @@ function drawDice(width, value) {
             imgData.data[pos++] = colorA;
         }
     }
-    console.log(imgData);
     return imgData;
 }
 
