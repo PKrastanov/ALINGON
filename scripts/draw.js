@@ -58,6 +58,11 @@ function drawTheBoard() {
     ctx.fillText("C#",50,580);
     ctx.fillText("Ruby",450,180);
     ctx.fillText("Java",450,580);
+	
+	drawStartPlaces(140, 40, 18);
+	drawStartPlaces(140, 540, 18);
+	drawStartPlaces(540, 40, 18);
+	drawStartPlaces(540, 540, 18);
 }
 
 function createPath() {
@@ -207,6 +212,26 @@ function drawStartField(color, width, text) {
         }
     }
     return imgData;
+}
+
+function drawStartPlaces(startX, startY, radius) {
+	ctx.strokeStyle="white";
+
+    ctx.beginPath();
+	ctx.arc(startX,startY,radius,0,2*Math.PI);
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.arc(startX+3*radius,startY,radius,0,2*Math.PI);
+	ctx.stroke();
+	
+	ctx.beginPath();
+	ctx.arc(startX,startY+3*radius,radius,0,2*Math.PI);
+	ctx.stroke();
+	
+	ctx.beginPath();	
+	ctx.arc(startX+3*radius,startY+3*radius,radius,0,2*Math.PI);
+	ctx.stroke();
 }
 
 function drawCenterTile(width) {
