@@ -59,10 +59,10 @@ function drawTheBoard() {
     ctx.fillText("Ruby",450,180);
     ctx.fillText("Java",450,580);
 	
-	drawStartPlaces(140, 40, 18);
-	drawStartPlaces(140, 540, 18);
-	drawStartPlaces(540, 40, 18);
-	drawStartPlaces(540, 540, 18);
+	drawStartPlaces(140, 40, 15);
+	drawStartPlaces(140, 440, 15);
+	drawStartPlaces(540, 40, 15);
+	drawStartPlaces(540, 440, 15);
 }
 
 function createPath() {
