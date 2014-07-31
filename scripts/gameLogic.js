@@ -14,26 +14,28 @@ var GameLogic = (function () {
         el.style.padding = '20px 20px 10px 20px';
         el.style.fontSize = '36px';
         el.innerText = 'Roll';
-        el.addEventListener('click', function () {
-            diceNumber = Math.floor((Math.random() * 6) + 1);
-            el.style.padding = '10px 0 10px 35px';
-            el.style.fontSize = '52px';
-            el.innerText = diceNumber + '';
+        el.addEventListener('click', dice);
+    };
 
-            for(player in allPlayers) {
-                if(player == 'gamer') {
-                    setPawnsPosition(player, diceNumber);
-                    allPlayers[player].drawDiceNumber.number = diceNumber;
-                }
-                else {
-                    var number = randomNumber();
-                    setPawnsPosition(player, number);
-                    allPlayers[player].drawDiceNumber.number = number;
-                }
+    var dice = function () {
+        diceNumber = Math.floor((Math.random() * 6) + 1);
+        el.style.padding = '10px 0 10px 35px';
+        el.style.fontSize = '52px';
+        el.innerText = diceNumber + '';
+
+        for(player in allPlayers) {
+            if(player == 'gamer') {
+                setPawnsPosition(player, diceNumber);
+                allPlayers[player].drawDiceNumber.number = diceNumber;
             }
+            else {
+                var number = randomNumber();
+                setPawnsPosition(player, number);
+                allPlayers[player].drawDiceNumber.number = number;
+            }
+        }
 
-            Start.game();
-        });
+        Start.game();
     };
 
     function setPawnsPosition(player, moveWith) {
@@ -49,6 +51,10 @@ var GameLogic = (function () {
             for(i = 0; i < allPlayers[player].pawns.length; i++) {
                 if (allPlayers[player].pawns[i].numberPosition === allPlayers[player].pawns[i].path.length - 1) {
                     gameOver(player);
+                    el.removeEventListener('click', dice);
+                    el.style.padding = '15px 10px 0 5px';
+                    el.style.fontSize = '32px';
+                    el.innerText = 'END'
                 }
             }
         }
@@ -58,6 +64,7 @@ var GameLogic = (function () {
         var gameOver = document.createElement('div');
         gameOver.className = 'gameover-div';
         gameOver.innerText = 'Game Over\nWinner is ' + allPlayers[player].name;
+        gameOver.style.color = allPlayers[player].color;
         document.body.appendChild(gameOver);
     };
 

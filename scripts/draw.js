@@ -131,8 +131,8 @@ function movePawns (allPlayers) {
         for(i = 0; i < thisPlayer.pawns.length; i++) {
             if(thisPlayer.pawns[i].started) {
                 if (!thisPlayer.pawns[i].drawed) {
-                    var pawn = paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 5)
-                        .attr({fill: thisPlayer.color});
+                    var pawn = paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 10)
+                        .attr({fill: thisPlayer.color, stroke: "#000", "stroke-width": 10, "stroke-opacity": 0.5});
                     thisPlayer.pawns[i].drawed = pawn;
                 }
                 else {

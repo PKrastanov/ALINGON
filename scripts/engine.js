@@ -18,7 +18,7 @@ var Start = (function () {
             gamer: new Player('Gamer', '#00FF00', path.first, {x: 440, y: 440}),
             BotRuby: new Player('BotRuby', '#00FFFF', path.second, {x: 440, y: 40}),
             BotJS: new Player('BotJS', '#FFFF00', path.thurd, {x: 40, y: 40}),
-            BotC: new Player('BotC#', '#FF0000', path.four, {x: 40, y: 440})
+            BotC: new Player('BotC#', '#FE2E2E', path.four, {x: 40, y: 440})
         };
 
     }
