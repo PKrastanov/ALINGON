@@ -1,13 +1,15 @@
 var Pawn = (function () {
-
+    //Private
     var ConstTypes = ['javascript', 'cSharp', 'java', 'python'];
-    
-    var Pawn = function (path, started, finished) {          // started means that the pawn is on the board
+
+    //Public
+    var Pawn = function (path, started, finished) {
         //this.type = type;
         this.started = started;
         this.finished = finished;
-        this.position = path[0];
+        this.drawed;
         this.path = path;
+        this.position = path[0];
         this.numberPosition = 0;
     };
     

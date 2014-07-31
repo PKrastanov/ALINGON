@@ -1,13 +1,13 @@
 var paper = Raphael(5, 5, 633, 633);
-var layerTwo = Raphael(5, 5, 633, 633);
 var canvas = document.getElementById("gameboard");
 var ctx = canvas.getContext("2d");
+var colorR,
+    colorG,
+    colorB,
+    colorA;
 
-var Draw = (function () {
-    init();
-})();
 
-function init() {
+function initBoard() {
     initPlayGround();
 }
 
@@ -32,6 +32,7 @@ function initPlayGround() {
     drawTheBoard();
     createPath();
 }
+
 function drawTheBoard() {
     refreshBoard();
     var boardmap = createMyMap();
@@ -122,51 +123,26 @@ function createPath() {
 }
 
 function movePawns (allPlayers) {
-    paper.clear();
     for(var player in allPlayers) {
         var thisPlayer = allPlayers[player];
 
         for(var i = 0; i < thisPlayer.pawns.length; i++) {
             if(thisPlayer.pawns[i].started) {
-                paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 5)
-                    .attr({fill: thisPlayer.color});
+                if (!thisPlayer.pawns[i].drawed) {
+                    var pawn = paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 5)
+                        .attr({fill: thisPlayer.color});
+                    thisPlayer.pawns[i].drawed = pawn;
+                }
+                else {
+                    thisPlayer.pawns[i].drawed.animate({
+                        x: thisPlayer.pawns[i].position.x + 5,
+                        y: thisPlayer.pawns[i].position.y + 5
+                    }, 500);
+                }
             }
         }
     }
 }
-
-var rollDace = function  () {
-    var number;
-    var reddy = false;
-    var centerHeight = layerTwo.height/2-30;
-    var centerWidth = layerTwo.width/2-30;
-    document.addEventListener('click', function () {
-        reddy = true;
-    });
-
-    var randomNumber = function () {
-        layerTwo.clear();
-        number = Math.floor((Math.random() * 6) + 1);
-
-        layerTwo.rect(centerHeight, centerWidth, 80, 80, 5).attr({
-            fill: 'white'
-        });
-        layerTwo.text(centerHeight+40, centerWidth+40, number+'').attr({
-            "font-size": 60
-        });
-
-        if(!reddy) {
-            setTimeout(randomNumber, 50)
-        }
-        else {
-            layerTwo.clear();
-            Start.play(number);
-        }
-
-    };
-
-    randomNumber();
-};
 
 function createMyMap() {
     var mapxy = [];
@@ -199,10 +175,12 @@ function refreshBoard() {
 
     tileWidth = Math.ceil(canvasWidth / 16);
 }
+
 function resizeboard() {
     refreshBoard();
     drawTheBoard();
 }
+
 function drawARegularTile(color, width) {
     var imgData = ctx.createImageData(width, width);
     var pos = 0;
@@ -292,6 +270,7 @@ function drawCenterTile(width) {
     }
     return imgData;
 }
+
 function setColor(color) {
     switch (color) {
         case "blue": colorR = 150, colorG = 150, colorB = 255, colorA = 255; break;
@@ -303,8 +282,6 @@ function setColor(color) {
         default: colorR = 0, colorG = 0, colorB = 0, colorA = 0; break;
     }
 }
-
-
 
 function drawDot(X, Y, x, y) {
     var round = 2;
@@ -409,4 +386,3 @@ function drawDice(width, value) {
     }
     return imgData;
 }
-

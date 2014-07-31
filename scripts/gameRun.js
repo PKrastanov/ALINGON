@@ -1,3 +1,1 @@
-(function () {
-    Start.game();
-});
+Start.game();
