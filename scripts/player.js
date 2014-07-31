@@ -16,10 +16,15 @@ var Player = (function () {
     };
 
     //Public
-    var Player = function (name, color, path) {
+    var Player = function (name, color, path, position) {
         this.color = color;
         this.name = name;
         this.pawns = init(path);
+        this.drawDiceNumber = {
+            x: position.x,
+            y: position.y,
+            number: 0
+        }
     };
 
     Player.prototype.addNewPawn = function () {

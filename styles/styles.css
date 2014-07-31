@@ -9,3 +9,19 @@
     box-shadow: 5px 5px 2px #888888;
     border-radius: 5px;
 }
+
+.gameover-div{
+    position: absolute;
+    left: 80px;
+    top: 200px;
+    width: 450px;
+    height: 180px;
+    font-size: 55px;
+    font-weight: bold;
+    color: red;
+    background-color: white;
+    border: 1px solid;
+    border-radius: 10px;
+    padding-left: 50px;
+    padding-top: 20px;
+}

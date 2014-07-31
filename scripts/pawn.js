@@ -23,8 +23,10 @@ var Pawn = (function () {
     };
 
     Pawn.prototype.setPosition = function (number) {
-        this.numberPosition += number;
-        this.position = this.path[this.numberPosition];
+        if(this.numberPosition + number <= this.path.length-1) {
+            this.numberPosition += number;
+            this.position = this.path[this.numberPosition];
+        }
     };
 
     return Pawn;

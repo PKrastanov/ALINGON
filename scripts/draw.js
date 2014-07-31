@@ -1,10 +1,12 @@
-var paper = Raphael(5, 5, 633, 633);
-var canvas = document.getElementById("gameboard");
-var ctx = canvas.getContext("2d");
-var colorR,
+var paper = Raphael(5, 5, 633, 633),
+    paperTwo = Raphael(5, 5, 633, 633),
+    canvas = document.getElementById("gameboard"),
+    ctx = canvas.getContext("2d"),
+    colorR,
     colorG,
     colorB,
-    colorA;
+    colorA,
+    i;
 
 
 function initBoard() {
@@ -126,7 +128,7 @@ function movePawns (allPlayers) {
     for(var player in allPlayers) {
         var thisPlayer = allPlayers[player];
 
-        for(var i = 0; i < thisPlayer.pawns.length; i++) {
+        for(i = 0; i < thisPlayer.pawns.length; i++) {
             if(thisPlayer.pawns[i].started) {
                 if (!thisPlayer.pawns[i].drawed) {
                     var pawn = paper.rect(thisPlayer.pawns[i].position.x + 5, thisPlayer.pawns[i].position.y + 5, 20, 20, 5)
@@ -143,6 +145,18 @@ function movePawns (allPlayers) {
         }
     }
 }
+
+var drawDiceNumber = function (allPlayers) {
+    paperTwo.clear();
+    for(var player in allPlayers) {
+        var thisPlayer = allPlayers[player];
+
+        paperTwo.rect(thisPlayer.drawDiceNumber.x, thisPlayer.drawDiceNumber.y, 50, 50, 5)
+            .attr({stroke: 'black'});
+        paperTwo.text(thisPlayer.drawDiceNumber.x + 25, thisPlayer.drawDiceNumber.y + 25, thisPlayer.drawDiceNumber.number+'')
+            .attr({'font-size': 42});
+    }
+};
 
 function createMyMap() {
     var mapxy = [];
@@ -176,14 +190,9 @@ function refreshBoard() {
     tileWidth = Math.ceil(canvasWidth / 16);
 }
 
-function resizeboard() {
-    refreshBoard();
-    drawTheBoard();
-}
-
 function drawARegularTile(color, width) {
-    var imgData = ctx.createImageData(width, width);
-    var pos = 0;
+    var imgData = ctx.createImageData(width, width),
+        pos = 0;
     for (var x = 0; x < width; x++) {
         for (var y = 0; y < width; y++) {
             var x2 = x - Math.ceil(width / 2);
@@ -207,12 +216,13 @@ function drawARegularTile(color, width) {
             imgData.data[pos++] = colorA;
         }
     }
+
     return imgData;
 }
 
 function drawStartField(color, width, text) {
-    var imgData = ctx.createImageData(width, width);
-    var pos = 0;
+    var imgData = ctx.createImageData(width, width),
+        pos = 0;
     setColor(color);
     for (var x = 0; x < width; x++) {
         for (var y = 0; y < width; y++) {
@@ -268,6 +278,7 @@ function drawCenterTile(width) {
             imgData.data[pos++] = colorA;
         }
     }
+
     return imgData;
 }
 
@@ -285,7 +296,7 @@ function setColor(color) {
 
 function drawDot(X, Y, x, y) {
     var round = 2;
-    for (var i = 0; i < X.length; i++) {
+    for (i = 0; i < X.length; i++) {
         if (X[i] >= x - round && X[i] <= x + round && Y[i] >= y - round && Y[i] <= y + round) {
             return true;
         }
